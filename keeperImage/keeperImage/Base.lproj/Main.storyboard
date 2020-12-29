@@ -12,7 +12,7 @@
         <!--Keeper View Controller-->
         <scene sceneID="AtK-TZ-vkq">
             <objects>
-                <viewController storyboardIdentifier="KeeperViewController" id="QEN-oa-n22" customClass="KeeperViewController" customModule="HW_18_keeper_image" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="KeeperViewController" id="QEN-oa-n22" customClass="KeeperViewController" customModule="keeperImage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="uNE-qR-INk">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCollectionViewCell" id="2xK-Jl-U4f" customClass="ImageCollectionViewCell" customModule="HW_18_keeper_image" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ImageCollectionViewCell" id="2xK-Jl-U4f" customClass="ImageCollectionViewCell" customModule="keeperImage" customModuleProvider="target">
                                         <rect key="frame" x="93" y="0.0" width="228" height="215"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="yqx-vG-BIu">
@@ -90,10 +90,63 @@
             </objects>
             <point key="canvasLocation" x="2071" y="835"/>
         </scene>
+        <!--Selected Image View Controller-->
+        <scene sceneID="Idf-pQ-SF1">
+            <objects>
+                <viewController storyboardIdentifier="SelectedImageViewController" id="gu5-1F-DFn" customClass="SelectedImageViewController" customModule="keeperImage" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Tdj-Xn-Xl5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ziq-SU-qcH">
+                                <rect key="frame" x="0.0" y="44" width="414" height="768"/>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D5U-79-OWw">
+                                <rect key="frame" x="374.5" y="822" width="19.5" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="TXk-zb-CCQ"/>
+                                </constraints>
+                                <state key="normal" image="trash" catalog="system"/>
+                                <connections>
+                                    <action selector="deleteImageButtonPressed:" destination="gu5-1F-DFn" eventType="touchUpInside" id="MV7-K3-K59"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B7y-zl-Jci">
+                                <rect key="frame" x="320.5" y="822" width="19" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="UF5-1W-MGn"/>
+                                </constraints>
+                                <state key="normal" image="square.and.arrow.up" catalog="system"/>
+                                <connections>
+                                    <action selector="shareImageButtonPressed:" destination="gu5-1F-DFn" eventType="touchUpInside" id="RIO-TO-a5e"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="p32-PO-Iem"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="B7y-zl-Jci" firstAttribute="top" secondItem="Ziq-SU-qcH" secondAttribute="bottom" constant="10" id="4sm-mx-2Yx"/>
+                            <constraint firstItem="D5U-79-OWw" firstAttribute="leading" secondItem="B7y-zl-Jci" secondAttribute="trailing" constant="35" id="79V-gA-8Hw"/>
+                            <constraint firstItem="D5U-79-OWw" firstAttribute="bottom" secondItem="p32-PO-Iem" secondAttribute="bottom" id="Isu-Pm-0De"/>
+                            <constraint firstItem="Ziq-SU-qcH" firstAttribute="top" secondItem="p32-PO-Iem" secondAttribute="top" id="aMh-uu-IID"/>
+                            <constraint firstItem="D5U-79-OWw" firstAttribute="top" secondItem="Ziq-SU-qcH" secondAttribute="bottom" constant="10" id="cl5-eN-Gwe"/>
+                            <constraint firstItem="p32-PO-Iem" firstAttribute="trailing" secondItem="Ziq-SU-qcH" secondAttribute="trailing" id="pN5-E9-ovn"/>
+                            <constraint firstItem="Ziq-SU-qcH" firstAttribute="leading" secondItem="p32-PO-Iem" secondAttribute="leading" id="vhi-1a-j3W"/>
+                            <constraint firstItem="p32-PO-Iem" firstAttribute="trailing" secondItem="D5U-79-OWw" secondAttribute="trailing" constant="20" id="wAv-mg-LCh"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="Ziq-SU-qcH" id="LMl-CM-sjk"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="tls-Qk-qKM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3051" y="834"/>
+        </scene>
         <!--View Controller-->
         <scene sceneID="KPq-gD-T9f">
             <objects>
-                <viewController storyboardIdentifier="ViewController" id="XFq-8P-pyK" customClass="ViewController" customModule="HW_18_keeper_image" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ViewController" id="XFq-8P-pyK" customClass="ViewController" customModule="keeperImage" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="h8w-aN-3tV">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -110,6 +163,16 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="rUH-V9-G5A">
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" style="large" translatesAutoresizingMaskIntoConstraints="NO" id="ogi-jc-fTE">
+                                            <rect key="frame" x="197" y="394" width="20" height="20"/>
+                                            <color key="color" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </activityIndicatorView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ogi-jc-fTE" firstAttribute="centerX" secondItem="rUH-V9-G5A" secondAttribute="centerX" id="O6M-ne-8DM"/>
+                                        <constraint firstItem="ogi-jc-fTE" firstAttribute="centerY" secondItem="rUH-V9-G5A" secondAttribute="centerY" id="SIC-2N-JKP"/>
+                                    </constraints>
                                 </view>
                                 <blurEffect style="regular"/>
                             </visualEffectView>
@@ -133,6 +196,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Opv-Z7-txJ"/>
                     <connections>
+                        <outlet property="activityIndicator" destination="ogi-jc-fTE" id="E7c-2F-7V1"/>
                         <outlet property="blurEffectView" destination="jYj-to-oX5" id="cdO-Mz-jtj"/>
                     </connections>
                 </viewController>
@@ -161,6 +225,8 @@
     </scenes>
     <resources>
         <image name="image" width="1125" height="2436"/>
+        <image name="square.and.arrow.up" catalog="system" width="115" height="128"/>
+        <image name="trash" catalog="system" width="121" height="128"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

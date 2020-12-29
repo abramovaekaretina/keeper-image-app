@@ -8,5 +8,6 @@ target 'keeperImage' do
   # Pods for keeperImage
 
 pod 'SwiftLint'
+pod 'SwiftyKeychainKit', '1.0.0-beta.2'
 
 end

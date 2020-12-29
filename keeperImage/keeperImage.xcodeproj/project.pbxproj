@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,7 @@
 		7B02D6D7258434B900C27320 /* KeeperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02D6D6258434B800C27320 /* KeeperViewController.swift */; };
 		7B02D6DA2584350A00C27320 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02D6D92584350A00C27320 /* ImageCollectionViewCell.swift */; };
 		7B02D6DD2584353800C27320 /* UIView+Shadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B02D6DC2584353800C27320 /* UIView+Shadow.swift */; };
+		7B7C9A53258F80B80013B5A7 /* SelectedImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B7C9A52258F80B80013B5A7 /* SelectedImageViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +34,7 @@
 		7B02D6D6258434B800C27320 /* KeeperViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeeperViewController.swift; sourceTree = "<group>"; };
 		7B02D6D92584350A00C27320 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		7B02D6DC2584353800C27320 /* UIView+Shadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Shadow.swift"; sourceTree = "<group>"; };
+		7B7C9A52258F80B80013B5A7 /* SelectedImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedImageViewController.swift; sourceTree = "<group>"; };
 		B36409EF000BCB3A1B960823 /* Pods_keeperImage.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_keeperImage.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -71,16 +73,25 @@
 			children = (
 				7B02D6C1258433C500C27320 /* AppDelegate.swift */,
 				7B02D6C3258433C500C27320 /* SceneDelegate.swift */,
-				7B02D6C5258433C500C27320 /* ViewController.swift */,
 				7B02D6DC2584353800C27320 /* UIView+Shadow.swift */,
 				7B02D6D92584350A00C27320 /* ImageCollectionViewCell.swift */,
 				7B02D6C7258433C500C27320 /* Main.storyboard */,
-				7B02D6D6258434B800C27320 /* KeeperViewController.swift */,
+				7BE675C0258B47D6005AE473 /* VCs */,
 				7B02D6CA258433CC00C27320 /* Assets.xcassets */,
 				7B02D6CC258433CC00C27320 /* LaunchScreen.storyboard */,
 				7B02D6CF258433CC00C27320 /* Info.plist */,
 			);
 			path = keeperImage;
+			sourceTree = "<group>";
+		};
+		7BE675C0258B47D6005AE473 /* VCs */ = {
+			isa = PBXGroup;
+			children = (
+				7B7C9A52258F80B80013B5A7 /* SelectedImageViewController.swift */,
+				7B02D6C5258433C500C27320 /* ViewController.swift */,
+				7B02D6D6258434B800C27320 /* KeeperViewController.swift */,
+			);
+			path = VCs;
 			sourceTree = "<group>";
 		};
 		A6E2A1B9E004E812511CA2F9 /* Pods */ = {
@@ -112,6 +123,7 @@
 				7B02D6BB258433C500C27320 /* Frameworks */,
 				7B02D6BC258433C500C27320 /* Resources */,
 				7B02D6E525843A8700C27320 /* ShellScript */,
+				941F08802C201721DC1736E0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -207,6 +219,23 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/SwiftLint/swiftlint\"\n";
 		};
+		941F08802C201721DC1736E0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-keeperImage/Pods-keeperImage-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-keeperImage/Pods-keeperImage-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-keeperImage/Pods-keeperImage-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -218,6 +247,7 @@
 				7B02D6DA2584350A00C27320 /* ImageCollectionViewCell.swift in Sources */,
 				7B02D6C6258433C500C27320 /* ViewController.swift in Sources */,
 				7B02D6C2258433C500C27320 /* AppDelegate.swift in Sources */,
+				7B7C9A53258F80B80013B5A7 /* SelectedImageViewController.swift in Sources */,
 				7B02D6DD2584353800C27320 /* UIView+Shadow.swift in Sources */,
 				7B02D6C4258433C500C27320 /* SceneDelegate.swift in Sources */,
 			);
