@@ -166,8 +166,13 @@ extension KeeperViewController: UICollectionViewDataSource, UICollectionViewDele
             UserDefaults.standard.setValue(arrayOfImagesName, forKey: "ArrayNameKey")
             UserDefaults.standard.setValue(numberOfImage, forKey: "NumberKey")
             let absoluteString = documentPath.absoluteString
-            let imagePath = "\(absoluteString)Images/\(arrayOfImagesName[numberOfImage])".replacingOccurrences(of: "file://", with: "")
-            UserDefaults.standard.setValue(imagePath, forKey: "ImagePathKey")
+            
+            if let login = login {
+                let imagePath = "\(absoluteString)Images/\(login)/\(arrayOfImagesName[numberOfImage])".replacingOccurrences(of: "file://", with: "")
+                print(imagePath)
+                UserDefaults.standard.setValue(imagePath, forKey: "ImagePathKey")
+            }
+            
         }
     }
 }
