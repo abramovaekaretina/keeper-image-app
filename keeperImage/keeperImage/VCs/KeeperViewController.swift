@@ -12,35 +12,28 @@ import SwiftyKeychainKit
 
 class KeeperViewController: UIViewController {
 
-    private let pickerController = UIImagePickerController()
-    let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-    let fileManager = FileManager.default
-    lazy var imagesPath = documentPath.appendingPathComponent("Images")
-    var numberOfImage: Int = -1
-    var logins = [String]()
-    var login: String?
 
     @IBOutlet weak var choosePhotoButton: UIButton!
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var openCameraButton: UIButton!
 
-//    var arrayOfImages: [UIImage?] = [
-//        UIImage(named: "image1"),
-//        UIImage(named: "image2"),
-//        UIImage(named: "image3"),
-//        UIImage(named: "image4"),
-//        UIImage(named: "image5"),
-//        UIImage(named: "image6"),
-//        UIImage(named: "image7")
-//    ]
+    lazy var imagesPath = documentPath.appendingPathComponent("Images")
+    
+    //MARK: - Private properties
+    
+    private let pickerController = UIImagePickerController()
+    private let documentPath = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+    private let fileManager = FileManager.default
 
-    var arrayOfImages = [UIImage?]()
-    var arrayOfImagesName = [String]()
-
+    private var arrayOfImages = [UIImage?]()
+    private var arrayOfImagesName = [String]()
+    private var numberOfImage: Int = -1
+    
+    //MARK: - Lifecycle functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
-        if let login = login {
+        if let login = UserDefaults.standard.value(forKey: "Login") as? String {
             let newPath = imagesPath.appendingPathComponent(login)
             try? fileManager.createDirectory(at: newPath, withIntermediateDirectories: true, attributes: nil)
             print(newPath)
@@ -48,17 +41,11 @@ class KeeperViewController: UIViewController {
             print("error")
         }
         
-//        if let login = UserDefaults.standard.value(forKey: "Login") as? String {
-//            print(imagesPath)
-//            let newPath = imagesPath.appendingPathComponent(login)
-//            try? fileManager.createDirectory(at: newPath, withIntermediateDirectories: true, attributes: nil)
-//            print(newPath)
-//        } else {
-//            print("error")
-//        }
-        
         navigationController?.navigationBar.isHidden = false
         choosePhotoButton.layer.cornerRadius = 10
+        openCameraButton.layer.cornerRadius = 10
+        choosePhotoButton.setShadow(color: UIColor.white.cgColor, offset: CGSize(width: 0, height: 0), opacity: 1, radius: 10)
+        openCameraButton.setShadow(color: UIColor.white.cgColor, offset: CGSize(width: 0, height: 0), opacity: 1, radius: 10)
 
         pickerController.sourceType = .photoLibrary
         pickerController.allowsEditing = true
@@ -66,8 +53,6 @@ class KeeperViewController: UIViewController {
 
         collectionView.dataSource = self
         collectionView.delegate = self
-        
-        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -75,9 +60,29 @@ class KeeperViewController: UIViewController {
         collectionView.reloadData()
     }
 
+    //MARK: - IBActions
+    
+    @IBAction func choosePhotoButtonPressed(_ sender: Any) {
+        pickerController.sourceType = .photoLibrary
+        present(pickerController, animated: true)
+        print("Choose photo button pressed")
+    }
+    
+    @IBAction func openCameraButtonPressed(_ sender: Any) {
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            pickerController.sourceType = .camera
+            present(pickerController, animated: true)
+        } else {
+            showErrorAlert()
+//            print("парампам")
+        }
+    }
+    
+    //MARK: - Flow functions
+
     func createImage() {
         arrayOfImages.removeAll()
-        if let login = login {
+        if let login = UserDefaults.standard.value(forKey: "Login") as? String {
             if let imageNames = try? fileManager.contentsOfDirectory(atPath: "\(imagesPath.path)/\(login)") {
                 for imageName in imageNames {
                     if let image = UIImage(contentsOfFile: "\(imagesPath.path)/\(login)/\(imageName)") {
@@ -89,16 +94,16 @@ class KeeperViewController: UIViewController {
         }
     }
 
-    @IBAction func choosePhotoButtonPressed(_ sender: Any) {
-        present(pickerController, animated: true)
-        print("Choose photo button pressed")
+    func showErrorAlert() {
+        let errorAlert = UIAlertController(title: "Warning", message: "This device doesn't support the using camera", preferredStyle: .alert)
+        let enterAction = UIAlertAction(title: "OK", style: .default)
+        errorAlert.addAction(enterAction)
+        present(errorAlert, animated: true)
     }
     
-    func checkLogins() {
-//        for user in
-    }
-
 }
+
+//MARK: - Extension UIImagePicker
 
 extension KeeperViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func imagePickerController(_ picker: UIImagePickerController,
@@ -119,7 +124,7 @@ extension KeeperViewController: UIImagePickerControllerDelegate, UINavigationCon
             let data = image.jpegData(compressionQuality: 1)
             let imageName = "\(Date().timeIntervalSince1970).png"
             arrayOfImagesName.append(imageName)
-            if let login = login {
+            if let login = UserDefaults.standard.value(forKey: "Login") as? String {
                 let folderPath = "\(imagesPath.path)/\(login)"
                 print(folderPath)
                 if fileManager.createFile(atPath: "\(folderPath)/\(imageName)", contents: data, attributes: nil) {
@@ -135,6 +140,8 @@ extension KeeperViewController: UIImagePickerControllerDelegate, UINavigationCon
         picker.dismiss(animated: true)
     }
 }
+
+//MARK: - Extensions UICollectionView
 
 extension KeeperViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -167,12 +174,11 @@ extension KeeperViewController: UICollectionViewDataSource, UICollectionViewDele
             UserDefaults.standard.setValue(numberOfImage, forKey: "NumberKey")
             let absoluteString = documentPath.absoluteString
             
-            if let login = login {
+            if let login = UserDefaults.standard.value(forKey: "Login") as? String {
                 let imagePath = "\(absoluteString)Images/\(login)/\(arrayOfImagesName[numberOfImage])".replacingOccurrences(of: "file://", with: "")
                 print(imagePath)
                 UserDefaults.standard.setValue(imagePath, forKey: "ImagePathKey")
             }
-            
         }
     }
 }
